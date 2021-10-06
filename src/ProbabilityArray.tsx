@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useInterval } from './hooks/use_interval';
+import { OddsDot } from './OddsDot';
 import { OddsSquare } from './OddsSquare';
 import { RandType } from './types';
 
@@ -15,7 +16,7 @@ import { RandType } from './types';
 // TODO: Add target hit sound effect
 
 export const ProbabilityArray = () => {
-  const [clockSpeedMs] = useState(5);
+  const [clockSpeedMs] = useState(100);
   const [rand, setRand] = useState<RandType>({
     val: Math.random(),
     cycle: 1,
@@ -47,29 +48,19 @@ export const ProbabilityArray = () => {
         <OddsSquare rand={rand} denominator={16} />
         <OddsSquare rand={rand} denominator={32} />
         <OddsSquare rand={rand} denominator={64} />
-        <OddsSquare rand={rand} denominator={128} />
-        <OddsSquare rand={rand} denominator={256} />
-        <OddsSquare rand={rand} denominator={512} />
-        <OddsSquare rand={rand} denominator={1024} />
-        <OddsSquare rand={rand} denominator={2048} />
-        <OddsSquare rand={rand} denominator={4096} />
-        <OddsSquare rand={rand} denominator={8192} />
-        <OddsSquare rand={rand} denominator={16384} />
-        <OddsSquare rand={rand} denominator={32768} />
-        <OddsSquare rand={rand} denominator={65536} />
-        <OddsSquare rand={rand} denominator={131072} />
-        <OddsSquare rand={rand} denominator={262144} />
-        <OddsSquare rand={rand} denominator={524288} />
-        <OddsSquare rand={rand} denominator={1048576} />
-        <OddsSquare rand={rand} denominator={2097152} />
-        <OddsSquare rand={rand} denominator={4194304} />
-        <OddsSquare rand={rand} denominator={8388608} />
-        <OddsSquare rand={rand} denominator={16777216} />
-        <OddsSquare rand={rand} denominator={33554432} />
-        <OddsSquare rand={rand} denominator={67108864} />
-        <OddsSquare rand={rand} denominator={134217728} />
-        <OddsSquare rand={rand} denominator={268435456} />
-        <OddsSquare rand={rand} denominator={536870912} />
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '50px',
+        }}
+      >
+        {Array.from(Array(2000)).map(() => (
+          <OddsDot rand={rand} denominator={1000000} />
+        ))}
       </div>
     </>
   );
