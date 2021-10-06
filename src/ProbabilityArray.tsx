@@ -7,6 +7,17 @@ type RandType = {
   running: boolean;
 };
 
+// TODO: Add start/stop button
+// TODO: Abstract creation of page into a data structure (ex: say odds wanted and page is generated)
+// TODO: Style probabilities into boxes
+// TODO: Targets scale values to 1 in n instead of 0 to 1 so can display rand value
+// TODO: Animations when target is hit
+// TODO: Adjustable speed
+// TODO: Alternative Target display that is just a box that changes colors when hit
+// TODO: Add sound effect for clock running
+// TODO: Add close sounds effect
+// TODO: Add target hit sound effect
+
 export const ProbabilityArray = () => {
   const [clockSpeedMs, setClockSpeedMs] = useState(5);
   const [rand, setRand] = useState<RandType>({
