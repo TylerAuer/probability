@@ -4,20 +4,21 @@ export type RandType = {
   running: boolean;
 };
 
-enum OddsTypes {
-  'dots',
-  'squares',
+export enum TargetKinds {
+  'dot',
+  'square',
 }
 
-export type Odds = {
+export type TargetConfig = {
   numerator?: number;
   denominator: number;
-  type: keyof typeof OddsTypes;
+  type: keyof typeof TargetKinds;
 };
 
-export type Simulation = {
+export type SimulationConfig = {
   title: string;
   description: string;
-  OddsList: Odds[];
+  endpoint: string;
+  targetList: TargetConfig[];
   initialClockSpeedInMs?: number;
 };

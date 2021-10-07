@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { useInterval } from './hooks/use_interval';
-import { OddsDot } from './OddsDot';
-import { OddsSquare } from './OddsSquare';
-import { RandType } from './types';
+import { Target } from './Target';
+import { RandType, SimulationConfig } from './types';
 
 // TODO: Add start/stop button
 // TODO: Abstract creation of page into a data structure (ex: say odds wanted and page is generated)
@@ -15,8 +14,12 @@ import { RandType } from './types';
 // TODO: Add close sounds effect
 // TODO: Add target hit sound effect
 
-export const ProbabilityArray = () => {
-  const [clockSpeedMs] = useState(100);
+type SimulationProps = {
+  config: SimulationConfig;
+};
+
+export const Simulation = ({ config }: SimulationProps) => {
+  const [clockSpeedMs] = useState(500);
   const [rand, setRand] = useState<RandType>({
     val: Math.random(),
     cycle: 1,
@@ -31,24 +34,13 @@ export const ProbabilityArray = () => {
     });
   }, clockSpeedMs);
 
+  const { title, description } = config;
+
   return (
     <>
-      <h2>Cycle #{rand.cycle}</h2>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <OddsSquare rand={rand} denominator={2} />
-        <OddsSquare rand={rand} denominator={4} />
-        <OddsSquare rand={rand} denominator={8} />
-        <OddsSquare rand={rand} denominator={16} />
-        <OddsSquare rand={rand} denominator={32} />
-        <OddsSquare rand={rand} denominator={64} />
-      </div>
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <div>Cycle #{rand.cycle}</div>
       <div
         style={{
           display: 'flex',
@@ -58,8 +50,13 @@ export const ProbabilityArray = () => {
           marginTop: '50px',
         }}
       >
-        {Array.from(Array(2000)).map(() => (
-          <OddsDot rand={rand} denominator={1000000} />
+        {config.targetList.map((target, index) => (
+          <Target
+            rand={rand}
+            numerator={target.numerator}
+            denominator={target.denominator}
+            type={target.type}
+          />
         ))}
       </div>
     </>
