@@ -1,5 +1,7 @@
 import { useRef, useMemo, useState } from 'react';
 import { RandType, TargetKinds } from './types';
+import useSound from 'use-sound';
+import pop from './sounds/pop.mp3';
 
 export type TargetProps = {
   type: keyof typeof TargetKinds;
@@ -46,12 +48,14 @@ type TargetTypeProps = {
 export const TargetDot = ({ numerator, denominator, rand }: TargetTypeProps) => {
   const [hasSucceeded, setHasSucceeded] = useState(false);
   const modifier = useRef(Math.random());
+  const [play] = useSound(pop);
 
   const targetMax = useMemo(() => numerator / denominator, [numerator, denominator]);
   const modifiedProbability = (rand.val + modifier.current) % 1;
   const isSuccess = modifiedProbability <= targetMax;
 
   if (isSuccess && !hasSucceeded) {
+    play();
     setHasSucceeded(true);
   }
 
@@ -62,12 +66,14 @@ export const TargetSquare = ({ numerator = 1, denominator, rand }: TargetTypePro
   const [hasSucceeded, setHasSucceeded] = useState(false);
   const successCycle = useRef<null | number>(null);
   const modifier = useRef(Math.random());
+  const [play] = useSound(pop);
 
   const targetMax = useMemo(() => numerator / denominator, [numerator, denominator]);
   const modifiedProbability = (rand.val + modifier.current) % 1;
   const isSuccess = modifiedProbability <= targetMax;
 
   if (isSuccess && !hasSucceeded) {
+    play();
     successCycle.current = rand.cycle;
     setHasSucceeded(true);
   }

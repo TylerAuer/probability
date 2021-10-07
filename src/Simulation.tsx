@@ -19,7 +19,7 @@ type SimulationProps = {
 };
 
 export const Simulation = ({ config }: SimulationProps) => {
-  const [clockSpeedMs] = useState(500);
+  const [clockSpeedMs] = useState(100);
   const [rand, setRand] = useState<RandType>({
     val: Math.random(),
     cycle: 1,
@@ -45,7 +45,7 @@ export const Simulation = ({ config }: SimulationProps) => {
         style={{
           display: 'flex',
           flexWrap: 'wrap',
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           marginTop: '50px',
         }}

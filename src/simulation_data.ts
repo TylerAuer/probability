@@ -11,6 +11,16 @@ export const oneInAMillion: SimulationConfig = {
   }),
 };
 
+export const oneInAHundred: SimulationConfig = {
+  title: 'One in a Million',
+  description: 'How rare is a one-in-a-million chance',
+  endpoint: 'one-in-a-million',
+  targetList: generateIdenticalTargets(num.hundred, {
+    denominator: num.hundred,
+    type: 'dot',
+  }),
+};
+
 function generateIdenticalTargets(count: number, targetProps: TargetConfig) {
   const targets: TargetConfig[] = [];
   for (let i = 0; i < count; i++) {
